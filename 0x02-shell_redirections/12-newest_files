@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -l | head
+ls --format=single-column -t | head
