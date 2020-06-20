@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#This script show the files in the current directory
 files="$(ls --format=single-column)"
 for f in $files
 do
