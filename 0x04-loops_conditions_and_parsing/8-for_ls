@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+files=$(ls --format=single-column)
+for f in $files
+do
+	echo "$f" | cut -d'-' -f2
+done
