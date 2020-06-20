@@ -1,4 +1,5 @@
-s script parses a log of apache we server 
+#!/usr/bin/env bash
+# This script parses a log of apache we server 
 
 filename="apache-access.log"
 
