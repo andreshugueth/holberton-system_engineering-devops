@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# This script creates and deletes the file /var/run/holbertonscript.pid
+function handler()
+{
+	rm -rf /var/run/holbertonscript.pid
+	if $1;
+	then
+		echo "I hate the kill command"
+	fi
+	exit
+}
+echo "$$" > /var/run/holbertonscript.pid
+
+trap handler "true" SIGTERM
+trap handler "false" SIGQUIT
+trap 'echo "Y U no love me?!"' SIGINT
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
