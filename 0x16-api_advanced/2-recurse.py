@@ -1,28 +1,31 @@
 #!/usr/bin/python3
 """
-prints the titles of the first 10 hot posts listed for a given subreddit.
+2-recurse
 """
 import requests
 
 
 def recurse(subreddit, hot_list=[], after=""):
-    """
-    returns a list containing the titles of all hot articles for a given subreddit.
-    If no results are found for the given subreddit, the function should return None.
-    """
+    """Querying Reddit API, and returns all
+    hot articles for a given subreddit."""
+
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'user-agent': 'API Project by andreshugueth'}
-    arguments = {"limit": 100, "after": after}
-    r = requests.get(url, params=arguments, headers=headers).json()
-    children = r.get("data", {}).get("children", None)
-    pagination = r.get("data", {}).get("after", None)
+    headers = {'User-Agent': 'API Project by andreshugueth'}
+    arg1 = {"limit": 100, "after": after}
+    resp = requests.get(url, params=arg1, headers=headers)
+    list_a = resp.json().get('data', {}).get('children', None)
+    pagination = resp.json().get('data', {}).get('after', None)
 
     if pagination is not None:
-        if children:
-            for topic in children:
-                hot_list.append(topic.get("data").get("title"))
+
+        if list_a:
+            for item in list_a:
+                hot_list.append(item.get("data").get("title"))
+
         if pagination is not None:
-            recurse(subreddit, hot_list, after)
+            recurse(subreddit, hot_list, pagination)
+
         return hot_list
+
     else:
         return None
